@@ -149,6 +149,19 @@ describe('duration', () => {
     const str = toDurationInMilliseconds(-1, 0);
     expect(formattedValueToString(str)).toBe('1 millisecond ago');
   });
+  it.each`
+    value     | decimals     | expected
+    ${0.5}    | ${0}         | ${'< 1 millisecond'}
+    ${0.9999} | ${undefined} | ${'< 1 millisecond'}
+    ${-0.5}   | ${0}         | ${'< 1 millisecond ago'}
+  `('renders $value ms as "$expected"', ({ value, decimals, expected }) => {
+    const str = toDurationInMilliseconds(value, decimals);
+    expect(formattedValueToString(str)).toBe(expected);
+  });
+  it('renders a sub-millisecond number of seconds as "< 1 millisecond"', () => {
+    const str = toDurationInSeconds(0.0004, 0);
+    expect(formattedValueToString(str)).toBe('< 1 millisecond');
+  });
   it('seconds', () => {
     const str = toDurationInSeconds(1, 0);
     expect(formattedValueToString(str)).toBe('1 second');

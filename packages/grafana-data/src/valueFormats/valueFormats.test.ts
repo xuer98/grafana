@@ -77,6 +77,8 @@ describe('valueFormats', () => {
     ${'dateTimeAsSystem'}              | ${0}         | ${dateTime(new Date(2010, 6, 2)).valueOf()} | ${'2010-07-02 00:00:00'}
     ${'dtdurationms'}                  | ${undefined} | ${100000}                                   | ${'1 minute'}
     ${'dtdurationms'}                  | ${undefined} | ${150000}                                   | ${'2 minutes'}
+    ${'dtdurationms'}                  | ${undefined} | ${0.5}                                      | ${'< 1 millisecond'}
+    ${'dtdurations'}                   | ${undefined} | ${0.0004}                                   | ${'< 1 millisecond'}
     ${'ordinal'}                       | ${undefined} | ${1}                                        | ${'1st'}
     ${'ordinal'}                       | ${undefined} | ${2}                                        | ${'2nd'}
     ${'ordinal'}                       | ${undefined} | ${3}                                        | ${'3rd'}

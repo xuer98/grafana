@@ -216,6 +216,11 @@ export function toDuration(size: number, decimals: DecimalCount, timeScale: Inte
   // intervals_in_seconds uses seconds (duh), convert them to milliseconds here to minimize floating point errors
   size *= INTERVALS_IN_SECONDS[timeScale] * 1000;
 
+  // millisecond is the smallest unit, so the loop below would emit nothing for a non-zero value under 1 ms
+  if (size < 1) {
+    return { text: '< 1 millisecond' };
+  }
+
   const strings = [];
 
   // after first value >= 1 print only $decimals more
